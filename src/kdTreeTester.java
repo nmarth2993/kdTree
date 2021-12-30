@@ -78,13 +78,39 @@ public class kdTreeTester {
 		NodeFactory<Integer> nodeFactory = new NodeFactory<>();
 
 		kdTree<Integer> simpleTree = new kdTree<>();
+
+		// test deleting tree with single root node
 		simpleTree.insert(nodeFactory.createNode(5, 7));
 		simpleTree.delete(nodeFactory.createNode(5, 7));
-
 		if (simpleTree.head != null) {
-			System.err.println("expected null tree, got " + simpleTree.head + " instead");
+			System.err.println("Expected root to be null, got " + simpleTree.head + " instead");
 			return false;
 		}
+
+		// test deleting from an empty tree
+		simpleTree.delete(nodeFactory.createNode(6, 6));
+		if (simpleTree.head != null) {
+			System.err.println("Expected root to be null, got " + simpleTree.head + " instead");
+			return false;
+		}
+
+		// test deleting node not in tree
+		simpleTree.insert(nodeFactory.createNode(1, 1));
+		simpleTree.delete(nodeFactory.createNode(-1, -1));
+		if (!simpleTree.head.equals(nodeFactory.createNode(1, 1))) {
+			System.err.println("Expected root to be (1, 1), got " + simpleTree.head + " instead");
+			return false;
+		}
+
+		/*
+		 * // test deletion of a node not in the tree
+		 * tree.delete(nodeFactory.createNode(-1, -1));
+		 * 
+		 * if (tree.head != null) { System.err.println(""); return false; }
+		 * 
+		 * if (simpleTree.head != null) { System.err.println("expected null tree, got "
+		 * + simpleTree.head + " instead"); return false; }
+		 */
 
 		kdTree<Integer> tree = new kdTree<>();
 		ArrayList<Node<Integer>> nodeList = new ArrayList<>();
@@ -94,35 +120,43 @@ public class kdTreeTester {
 			nodeList.add(node);
 			tree.insert(node);
 
-			System.out.println("add Node " + node);
+			// System.out.println("add Node " + node);
 
 			// tree.dump(tree.tree);
 			// System.out.println();
 		}
 
-		/*
-		 * // test deletion of a node not in the tree
-		 * tree.delete(nodeFactory.createNode(-1, -1));
-		 * 
-		 * if (tree.head != null) { System.err.println(""); return false; }
-		 */
-
 		// first, remove the first 10 elements and check that the tree is valid
 		for (int i = 0; i < 10; i++) {
 			tree.delete(nodeList.get(i));
+
+			// check for a valid tree every deletion
+			if (!validTree(tree.head, true)) {
+				System.err.println("Found invalid tree in first deletion loop");
+				return false;
+			}
 		}
 
 		// tree must still be valid
 		if (!validTree(tree.head, true)) {
+			System.err.println("Found invalid tree after first deletion");
 			return false;
 		}
 
-		/*
-		 * // then, remove the remaining elements. after, the tree should be empty for
-		 * (int i = 10; i < 40; i++) { tree.delete(nodeList.get(i)); }
-		 */
+		// then, remove the remaining elements. after, the tree should be empty
+		for (int i = 10; i < 40; i++) {
+			tree.delete(nodeList.get(i));
+
+			// check for a valid tree every deletion
+			if (!validTree(tree.head, true)) {
+				System.err.println("Found invalid tree in second deletion loop");
+				return false;
+			}
+		}
 
 		// tree.dump();
-		return validTree(tree.head, true);
+		// return validTree(tree.head, true);
+
+		return true;
 	}
 }

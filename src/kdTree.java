@@ -83,7 +83,6 @@ public class kdTree<T extends Number & Comparable<T>> {
 	// this method removes the given node from the kd tree if it exists
 	// it returns the node that was removed
 	public void delete(Node<T> deleteNode) {
-		// TODO:
 		// https://stackoverflow.com/questions/7970966/kdtree-node-removal
 		// https://www.geeksforgeeks.org/k-dimensional-tree-set-3-delete/
 

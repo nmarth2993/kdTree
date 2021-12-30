@@ -65,4 +65,18 @@ public class Node<T extends Number & Comparable<T>> {
 		return x + ", " + y;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public boolean equals(Object o) {
+		/*
+		 * Pattern matching is JDK 16+ if (o instanceof Node<?> node) { return
+		 * node.x.compareTo(x) == 0 && node.y.compareTo(y) == 0; }
+		 */
+		if (o instanceof Node<?>) {
+			Node<T> node = (Node<T>) o;
+			return node.x.compareTo(x) == 0 && node.y.compareTo(y) == 0;
+		}
+		return false;
+	}
+
 }
