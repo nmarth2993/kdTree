@@ -88,6 +88,7 @@ public class kdTree<T extends Number & Comparable<T>> {
 		// https://www.geeksforgeeks.org/k-dimensional-tree-set-3-delete/
 
 		head = delete(head, deleteNode, true);
+		// delete(head, deleteNode, true);
 	}
 
 	private Node<T> delete(Node<T> head, Node<T> deleteNode, boolean checkX) {
@@ -101,9 +102,10 @@ public class kdTree<T extends Number & Comparable<T>> {
 			// case 1: leaf node
 			// simple deletion
 			if (deleteNode.getLeftChild() == null && deleteNode.getRightChild() == null) {
-				Node<T> deletedNode = deleteNode;
-				deleteNode = null;
-				return deletedNode;
+				/*
+				 * Node<T> deletedNode = deleteNode; deleteNode = null; return deletedNode;
+				 */
+				return null;
 			}
 
 			// case 2: single right child
@@ -119,7 +121,9 @@ public class kdTree<T extends Number & Comparable<T>> {
 				head.setRightChild(rightTree);
 
 				// return the deleted node
-				return deleteNode;
+				// return deleteNode;
+
+				return null;
 			}
 
 			// case 3:
@@ -137,7 +141,9 @@ public class kdTree<T extends Number & Comparable<T>> {
 				head.setRightChild(leftTree);
 
 				// return the deleted node
-				return deleteNode;
+				// return deleteNode;
+
+				return null;
 			}
 		}
 
@@ -145,20 +151,25 @@ public class kdTree<T extends Number & Comparable<T>> {
 		else {
 			if (checkX) {
 				if (deleteNode.getX().compareTo(head.getX()) < 0) {
-					return delete(head.getLeftChild(), deleteNode, !checkX);
+					// return delete(head.getLeftChild(), deleteNode, !checkX);
+					head.setLeftChild(delete(head.getLeftChild(), deleteNode, !checkX));
 				}
 				else {
-					return delete(head.getRightChild(), deleteNode, !checkX);
+					// return delete(head.getRightChild(), deleteNode, !checkX);
+					head.setRightChild(delete(head.getRightChild(), deleteNode, !checkX));
 				}
 			}
 			else {
 				if (deleteNode.getY().compareTo(head.getY()) < 0) {
-					return delete(head.getLeftChild(), deleteNode, !checkX);
+					// return delete(head.getLeftChild(), deleteNode, !checkX);
+					head.setLeftChild(delete(head.getLeftChild(), deleteNode, !checkX));
 				}
 				else {
-					return delete(head.getRightChild(), deleteNode, !checkX);
+					// return delete(head.getRightChild(), deleteNode, !checkX);
+					head.setRightChild(delete(head.getRightChild(), deleteNode, !checkX));
 				}
 			}
+			return head;
 		}
 	}
 
