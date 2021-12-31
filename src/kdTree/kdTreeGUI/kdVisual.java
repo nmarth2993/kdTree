@@ -1,7 +1,12 @@
+package kdTree.kdTreeGUI;
+
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import kdTree.kdTree;
+import kdTree.kdTreeFactory;
 
 public class kdVisual {
 	JFrame frame;

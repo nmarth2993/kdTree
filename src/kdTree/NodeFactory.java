@@ -1,3 +1,5 @@
+package kdTree;
+
 import java.util.Random;
 
 /*

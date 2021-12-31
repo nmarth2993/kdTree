@@ -1,3 +1,4 @@
+package kdTree;
 /*
  * Nicholas Marthinuss
  * Node class for k-d tree implementation

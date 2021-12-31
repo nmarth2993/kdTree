@@ -1,8 +1,11 @@
+package kdTree.kdTreeGUI;
+
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-
 // 
+
+import kdTree.kdTree;
 
 public class kdPanel extends JPanel {
 
@@ -32,19 +35,19 @@ public class kdPanel extends JPanel {
 	}
 
 	private Integer findMaxX() {
-		return tree.findMaximum(tree.head, true).getX();
+		return tree.findMaximum(tree.getHead(), true).getX();
 	}
 
 	private Integer findMaxY() {
-		return tree.findMaximum(tree.head, false).getY();
+		return tree.findMaximum(tree.getHead(), false).getY();
 	}
 
 	private Integer findRangeX() {
-		return maxValueX - tree.findMinimum(tree.head, true).getX();
+		return maxValueX - tree.findMinimum(tree.getHead(), true).getX();
 	}
 
 	private Integer findRangeY() {
-		return maxValueY - tree.findMinimum(tree.head, false).getY();
+		return maxValueY - tree.findMinimum(tree.getHead(), false).getY();
 	}
 
 	@Override

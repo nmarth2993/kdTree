@@ -1,3 +1,4 @@
+package kdTree;
 
 /*
  * Nicholas Marthinuss
@@ -172,7 +173,7 @@ public class kdTree<T extends Number & Comparable<T>> {
 		}
 	}
 
-	protected Node<T> findMinimum(Node<T> subTree, boolean xDimension) {
+	public Node<T> findMinimum(Node<T> subTree, boolean xDimension) {
 		if (subTree.getLeftChild() == null) {
 			return subTree;
 		}
@@ -181,7 +182,7 @@ public class kdTree<T extends Number & Comparable<T>> {
 		}
 	}
 
-	protected Node<T> findMaximum(Node<T> subTree, boolean xDimension) {
+	public Node<T> findMaximum(Node<T> subTree, boolean xDimension) {
 		if (subTree.getRightChild() == null) {
 			return subTree;
 		}
@@ -255,4 +256,7 @@ public class kdTree<T extends Number & Comparable<T>> {
 		System.out.print(")");
 	}
 
+	public Node<T> getHead() {
+		return head;
+	}
 }
