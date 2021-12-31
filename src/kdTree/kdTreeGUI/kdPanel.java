@@ -70,11 +70,23 @@ public class kdPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.fillRect(CORNER_PADDING, getHeight() - CORNER_PADDING, absoluteMax, 20);
+		// g.fillRect(CORNER_PADDING, getHeight() - CORNER_PADDING, absoluteMax, 20);
 
 		g.setColor(Color.RED);
 		for (Node<Integer> node : tree) {
-			g.fillOval(node.getX(), node.getY(), POINT_DIAMETER, POINT_DIAMETER);
+			// g.fillOval(node.getX(), node.getY(), POINT_DIAMETER, POINT_DIAMETER);
+			g.drawString(node.toString(), node.getX() * 2, node.getY() * 2);
+
+			// there is a strong sub-tree relation
+			// consider the simplest case: a node with two children
+			// the left tree is left of the root's partition
+			// the right tree is right of the root's partition
+			// both children will create partitions in the opposite dimension to the root
+
+			// one consideration is that these partitions must also be drawn keeping in mind
+			// a larger "superpartition" that the entire tree may be a part of
+			// to achieve this, a max/min x and y must be retained for each subtree
+			// the first "superpartition" is the entire plane with respective bounds
 		}
 
 		// g.fillRect(40, 50, 20, 100);
