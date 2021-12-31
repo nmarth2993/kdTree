@@ -1,12 +1,15 @@
 package kdTree;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /*
  * Nicholas Marthinuss
  * k-d tree implementation
  * 12/29/2021
  */
 
-public class kdTree<T extends Number & Comparable<T>> {
+public class kdTree<T extends Number & Comparable<T>> implements Iterable<Node<T>> {
 
 	Node<T> head;
 
@@ -259,4 +262,25 @@ public class kdTree<T extends Number & Comparable<T>> {
 	public Node<T> getHead() {
 		return head;
 	}
+
+	@Override
+	public Iterator<Node<T>> iterator() {
+		// I could do it the "real" way but the way I do it is so
+		// much less of a headache
+		ArrayList<Node<T>> inorderNodes = new ArrayList<>();
+		getInorderList(inorderNodes, head);
+
+		return inorderNodes.iterator();
+	}
+
+	private void getInorderList(ArrayList<Node<T>> list, Node<T> head) {
+		if (head == null) {
+			return;
+		}
+		getInorderList(list, head.getLeftChild());
+		list.add(head);
+		getInorderList(list, head.getRightChild());
+
+	}
+
 }
