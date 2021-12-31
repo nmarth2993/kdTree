@@ -1,5 +1,11 @@
 package kdTree;
 
+/*
+ * Nicholas Marthinuss
+ * k-d tree factory
+ * 12/31/2021
+ */
+
 public class kdTreeFactory<T extends Number & Comparable<T>> {
 
 	public static kdTree<Integer> createRandIntegerTree(int size) {
