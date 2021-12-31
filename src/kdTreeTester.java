@@ -20,13 +20,12 @@ public class kdTreeTester {
 	}
 
 	public static boolean testInsert() {
-		NodeFactory<Integer> nodeFactory = new NodeFactory<>();
 
 		kdTree<Integer> tree = new kdTree<>();
 		ArrayList<Node<Integer>> nodeList = new ArrayList<>();
 
 		for (int i = 0; i < 7; i++) {
-			Node<Integer> node = nodeFactory.createRandIntegerNode();
+			Node<Integer> node = NodeFactory.createRandIntegerNode();
 			nodeList.add(node);
 			tree.insert(node);
 
@@ -83,7 +82,7 @@ public class kdTreeTester {
 		ArrayList<Node<Integer>> nodeList = new ArrayList<>();
 
 		for (int i = 0; i < 50; i++) {
-			Node<Integer> node = nodeFactory.createRandIntegerNode();
+			Node<Integer> node = NodeFactory.createRandIntegerNode();
 			nodeList.add(node);
 			tree.insert(node);
 
@@ -134,7 +133,7 @@ public class kdTreeTester {
 		ArrayList<Node<Integer>> nodeList = new ArrayList<>();
 
 		for (int i = 0; i < 7; i++) {
-			Node<Integer> node = nodeFactory.createRandIntegerNode();
+			Node<Integer> node = NodeFactory.createRandIntegerNode();
 			nodeList.add(node);
 			tree.insert(node);
 		}
