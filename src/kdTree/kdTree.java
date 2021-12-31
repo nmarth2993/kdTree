@@ -190,7 +190,7 @@ public class kdTree<T extends Number & Comparable<T>> implements Iterable<Node<T
 			return subTree;
 		}
 		else {
-			return subTree.max(findMinimum(subTree.getLeftChild(), xDimension), xDimension);
+			return subTree.max(findMaximum(subTree.getRightChild(), xDimension), xDimension);
 		}
 	}
 
