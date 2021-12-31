@@ -68,8 +68,8 @@ public class Node<T extends Number & Comparable<T>> {
 
 	@Override
 	public String toString() {
-		// return "(" + x + ", " + y + ")";
-		return x + ", " + y;
+		return "(" + x + ", " + y + ")";
+		// return x + ", " + y;
 	}
 
 	@Override

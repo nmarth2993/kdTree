@@ -252,11 +252,11 @@ public class kdTree<T extends Number & Comparable<T>> implements Iterable<Node<T
 			return;
 		}
 
-		System.out.print("(");
+		System.out.print("[");
 		dump(node.getLeftChild());
 		System.out.print(node);
 		dump(node.getRightChild());
-		System.out.print(")");
+		System.out.print("]");
 	}
 
 	public Node<T> getHead() {
