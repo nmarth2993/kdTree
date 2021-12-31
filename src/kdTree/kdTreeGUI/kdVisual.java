@@ -1,3 +1,9 @@
+/*
+ * Nicholas Marthinuss
+ * k-d visual GUI
+ * 12/31/2021
+ */
+
 package kdTree.kdTreeGUI;
 
 import java.awt.Dimension;
