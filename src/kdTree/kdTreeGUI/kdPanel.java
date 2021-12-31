@@ -1,13 +1,24 @@
+/*
+ * Nicholas Marthinuss
+ * k-d tree panel
+ * 12/31/2021
+ */
+
 package kdTree.kdTreeGUI;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-// 
 
+import kdTree.Node;
 import kdTree.kdTree;
 
 public class kdPanel extends JPanel {
+
+	public static final int CORNER_PADDING = 50;
+
+	public static final int POINT_DIAMETER = 5;
 
 	// right now, the visual part will only support integers
 	// because generic arithmetic is a hassle and must go through
@@ -16,6 +27,8 @@ public class kdPanel extends JPanel {
 
 	Integer maxValueX;
 	Integer maxValueY;
+
+	Integer absoluteMax;
 
 	Integer xRange;
 	Integer yRange;
@@ -28,6 +41,9 @@ public class kdPanel extends JPanel {
 
 		xRange = findRangeX();
 		yRange = findRangeY();
+
+		// keep track of the absolute max to save the calculation in repaint
+		absoluteMax = maxValueX > maxValueY ? maxValueX : maxValueY;
 
 		System.out.println(
 				"found maxX: " + maxValueX + "; maxY: " + maxValueY + "; xRange: " + xRange + "; yRange: " + yRange);
@@ -54,7 +70,14 @@ public class kdPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.fillRect(40, 50, 20, 100);
+		g.fillRect(CORNER_PADDING, getHeight() - CORNER_PADDING, absoluteMax, 20);
+
+		g.setColor(Color.RED);
+		for (Node<Integer> node : tree) {
+			g.fillOval(node.getX(), node.getY(), POINT_DIAMETER, POINT_DIAMETER);
+		}
+
+		// g.fillRect(40, 50, 20, 100);
 	}
 
 }
