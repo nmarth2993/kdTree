@@ -172,12 +172,21 @@ public class kdTree<T extends Number & Comparable<T>> {
 		}
 	}
 
-	private Node<T> findMinimum(Node<T> subTree, boolean dimension) {
+	protected Node<T> findMinimum(Node<T> subTree, boolean xDimension) {
 		if (subTree.getLeftChild() == null) {
 			return subTree;
 		}
 		else {
-			return subTree.min(findMinimum(subTree.getLeftChild(), dimension), dimension);
+			return subTree.min(findMinimum(subTree.getLeftChild(), xDimension), xDimension);
+		}
+	}
+
+	protected Node<T> findMaximum(Node<T> subTree, boolean xDimension) {
+		if (subTree.getRightChild() == null) {
+			return subTree;
+		}
+		else {
+			return subTree.max(findMinimum(subTree.getLeftChild(), xDimension), xDimension);
 		}
 	}
 
