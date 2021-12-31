@@ -59,6 +59,12 @@ public class Node<T extends Number & Comparable<T>> {
 		}
 	}
 
+	public Node<T> max(Node<T> node, boolean checkX) {
+		// define max as opposite of min
+		Node<T> min = min(node, checkX);
+		return this == min ? node : this;
+	}
+
 	@Override
 	public String toString() {
 		// return "(" + x + ", " + y + ")";
