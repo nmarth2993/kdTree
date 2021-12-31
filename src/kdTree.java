@@ -214,7 +214,7 @@ public class kdTree<T extends Number & Comparable<T>> {
 		else {
 
 			// if searchNode < head traverse left tree
-			if (searchNode.getY().compareTo(head.getX()) < 0) {
+			if (searchNode.getY().compareTo(head.getY()) < 0) {
 				return search(head.getLeftChild(), searchNode, !checkX);
 			}
 

@@ -15,6 +15,7 @@ public class kdTreeTester {
 
 		System.out.println("Insert Test: " + (testInsert() ? TEST_PASS_STRING : TEST_FAIL_STRING));
 		System.out.println("Delete Test: " + (testDelete() ? TEST_PASS_STRING : TEST_FAIL_STRING));
+		System.out.println("Search Test: " + (testSearch() ? TEST_PASS_STRING : TEST_FAIL_STRING));
 
 	}
 
@@ -38,40 +39,6 @@ public class kdTreeTester {
 		// tree.dump();
 		return validTree(tree.head, true);
 
-	}
-
-	private static boolean validTree(Node<Integer> head, boolean checkX) {
-		if (head == null) {
-			return true;
-		}
-
-		if (head.getLeftChild() != null && head.getRightChild() != null) {
-			// make sure that the dimensions of the things are good
-			// check that left of dimensions < right of dimension
-			boolean ordered;
-			// System.out.println("checking head with 2 children: " + head);
-			if (checkX) {
-				ordered = head.getRightChild().getX().compareTo(head.getLeftChild().getX()) > 0;
-				// System.out.println("bool1: " + ordered);
-			}
-			else {
-				ordered = head.getRightChild().getY().compareTo(head.getLeftChild().getY()) > 0;
-				// System.out.println("bool2: " + ordered);
-			}
-			return ordered && validTree(head.getLeftChild(), !checkX) && validTree(head.getRightChild(), !checkX);
-		}
-
-		else {
-			if (head.getLeftChild() != null) {
-				return validTree(head.getLeftChild(), !checkX);
-			}
-			if (head.getRightChild() != null) {
-				return validTree(head.getRightChild(), !checkX);
-			}
-
-			// the case where current node has no children
-			return true;
-		}
 	}
 
 	public static boolean testDelete() {
@@ -158,5 +125,72 @@ public class kdTreeTester {
 		// return validTree(tree.head, true);
 
 		return true;
+	}
+
+	public static boolean testSearch() {
+		NodeFactory<Integer> nodeFactory = new NodeFactory<>();
+
+		kdTree<Integer> tree = new kdTree<>();
+		ArrayList<Node<Integer>> nodeList = new ArrayList<>();
+
+		for (int i = 0; i < 7; i++) {
+			Node<Integer> node = nodeFactory.createRandIntegerNode();
+			nodeList.add(node);
+			tree.insert(node);
+		}
+
+		// tree.dump();
+
+		// testing search for each element in list
+		for (Node<Integer> node : nodeList) {
+			// System.out.println("search: " + node);
+			if (tree.search(node) == null) {
+				System.err.println("expected to find node " + node + "; got null instead");
+				return false;
+			}
+
+		}
+
+		// test searching for element not in list
+		if (tree.search(nodeFactory.createNode(-1, -1)) != null) {
+			System.err.println("expected null");
+			return false;
+		}
+
+		return true;
+	}
+
+	private static boolean validTree(Node<Integer> head, boolean checkX) {
+		if (head == null) {
+			return true;
+		}
+
+		if (head.getLeftChild() != null && head.getRightChild() != null) {
+			// make sure that the dimensions of the things are good
+			// check that left of dimensions < right of dimension
+			boolean ordered;
+			// System.out.println("checking head with 2 children: " + head);
+			if (checkX) {
+				ordered = head.getRightChild().getX().compareTo(head.getLeftChild().getX()) > 0;
+				// System.out.println("bool1: " + ordered);
+			}
+			else {
+				ordered = head.getRightChild().getY().compareTo(head.getLeftChild().getY()) > 0;
+				// System.out.println("bool2: " + ordered);
+			}
+			return ordered && validTree(head.getLeftChild(), !checkX) && validTree(head.getRightChild(), !checkX);
+		}
+
+		else {
+			if (head.getLeftChild() != null) {
+				return validTree(head.getLeftChild(), !checkX);
+			}
+			if (head.getRightChild() != null) {
+				return validTree(head.getRightChild(), !checkX);
+			}
+
+			// the case where current node has no children
+			return true;
+		}
 	}
 }
