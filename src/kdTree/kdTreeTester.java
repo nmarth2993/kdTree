@@ -1,6 +1,7 @@
 package kdTree;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /*
  * Nicholas Marthinuss
@@ -18,6 +19,7 @@ public class kdTreeTester {
 		System.out.println("Insert Test: " + (testInsert() ? TEST_PASS_STRING : TEST_FAIL_STRING));
 		System.out.println("Delete Test: " + (testDelete() ? TEST_PASS_STRING : TEST_FAIL_STRING));
 		System.out.println("Search Test: " + (testSearch() ? TEST_PASS_STRING : TEST_FAIL_STRING));
+		System.out.println("Iterator Test: " + (testIterator() ? TEST_PASS_STRING : TEST_FAIL_STRING));
 
 	}
 
@@ -193,5 +195,45 @@ public class kdTreeTester {
 			// the case where current node has no children
 			return true;
 		}
+	}
+
+	public static boolean testIterator() {
+		kdTree<Integer> tree = kdTreeFactory.createRandIntegerTree(15);
+
+		// Iterator<Node<Integer>> treeIterator = tree.iterator();
+
+		// comparing the iterators
+		// EXCEPT INORDER DOESN'T MEAN "THE ORDER THAT YOU INSERTED THEM" IT MEANS IN
+		// ORDER OF THE TREE
+		ArrayList<Node<Integer>> nodeList = new ArrayList<>();
+		inorderList(nodeList, tree.getHead());
+		Iterator<Node<Integer>> testIter = nodeList.iterator();
+		Iterator<Node<Integer>> treeIter = tree.iterator();
+
+		while (testIter.hasNext()) {
+
+			if (treeIter.next() != testIter.next()) {
+				return false;
+			}
+
+		}
+
+		// the iterator should have the same amount of elements, so
+		// if it was not exhausted at the same time as the testIter, the test fails
+		if (treeIter.hasNext()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static void inorderList(ArrayList<Node<Integer>> list, Node<Integer> head) {
+		if (head == null) {
+			return;
+		}
+
+		inorderList(list, head.getLeftChild());
+		list.add(head);
+		inorderList(list, head.getRightChild());
 	}
 }
